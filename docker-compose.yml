@@ -1,0 +1,30 @@
+version: '2'
+services:
+  backend_1:
+    build:
+      context: ./backend_1
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+  backend_2:
+    build:
+      context: ./backend_2
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+  backend_3:
+    build:
+      context: ./backend_3
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+  load_balancing:
+    build:
+      context: ./master_node
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    links:
+      - backend_1
+      - backend_2
+      - backend_3
